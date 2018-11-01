@@ -85,7 +85,7 @@ import java.util.Scanner;
                 String move = in.nextLine();
                 if(validMove(move, player1, building))
                 {
-                    System.out.println("Your coordinates: row = " + player1.getxLoc() + " col = " + player1.getyLoc());
+                    building[player1.getxLoc()][player1.getyLoc()] = "[O]";
 
                 }
                 else {
