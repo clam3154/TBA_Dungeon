@@ -16,76 +16,76 @@ import java.util.Scanner;
 
         public static void main(String[] args)
         {
-            Room[][] building = new Room[14][14];
+            Room[][] dungeon = new Room[14][14];
 
-            //Fill the building with normal rooms
-            for (int x = 0; x<building.length; x++)
+            //Fill the dungeon with normal rooms
+            for (int x = 0; x<dungeon.length; x++)
             {
-                for (int y = 0; y < building[x].length; y++)
+                for (int y = 0; y < dungeon[x].length; y++)
                 {
-                    building[x][y] = new Room(x,y);
+                    dungeon[x][y] = new Room(x,y);
                 }
             }
 
             //Create a random boss room.
-            int xb = (int)(Math.random()*building.length);
-            int yb = (int)(Math.random()*building.length);
-            building[xb][yb] = new Boss(xb, yb);
+            int xb = (int)(Math.random()*dungeon.length);
+            int yb = (int)(Math.random()*dungeon.length);
+            dungeon[xb][yb] = new Boss(xb, yb);
 
             //Create a random trapped room.
-            int xt = (int)(Math.random()*building.length);
-            int yt = (int)(Math.random()*building.length);
+            int xt = (int)(Math.random()*dungeon.length);
+            int yt = (int)(Math.random()*dungeon.length);
             if(xb == xt && yb == yt)
             {
                 while(xb == xt && yb == yt)
                 {
-                    xt = (int)(Math.random()*building.length);
-                    yt = (int)(Math.random()*building.length);
+                    xt = (int)(Math.random()*dungeon.length);
+                    yt = (int)(Math.random()*dungeon.length);
                 }
             }
             else
             {
-                building[xt][yt] = new Trap(xt, yt);
+                dungeon[xt][yt] = new Trap(xt, yt);
             }
 
             //Create up to 7 random wall.
             for(int i = 1; i < 7; i ++)
             {
-                int xw = (int) (Math.random() * building.length);
-                int yw = (int) (Math.random() * building.length);
+                int xw = (int) (Math.random() * dungeon.length);
+                int yw = (int) (Math.random() * dungeon.length);
                 if (xb == xw && yb == yw || xt == xw && yt == yw)
                 {
                     while (xb == xw && yb == yw || xt == xw && yt == yw)
                     {
-                        xw = (int) (Math.random() * building.length);
-                        yw = (int) (Math.random() * building.length);
+                        xw = (int) (Math.random() * dungeon.length);
+                        yw = (int) (Math.random() * dungeon.length);
                     }
                 } else {
-                    building[xw][yw] = new Wall(xw, yw);
+                    dungeon[xw][yw] = new Wall(xw, yw);
                 }
             }
 
             //Setup player 1 and the input scanner
             Person player1 = new Person(0,0);
-            building[0][0].enterRoom(player1);
+            dungeon[0][0].enterRoom(player1);
             Scanner in = new Scanner(System.in);
             while(gameOn)
             {
                 String row = "";
-                for(int i=0; i<building.length; i++)
+                for(int i=0; i<dungeon.length; i++)
                 {
-                    for(int j=0; j<building[i].length; j++)
+                    for(int j=0; j<dungeon[i].length; j++)
                     {
-                        row += building[i][j];
+                        row += dungeon[i][j];
                     }
                     row += "\n";
                 }
                 System.out.println(row);
                 System.out.println("Where would you like to move? (Choose N, S, E, W)");
                 String move = in.nextLine();
-                if(validMove(move, player1, building))
+                if(validMove(move, player1, dungeon))
                 {
-                    building[player1.getxLoc()][player1.getyLoc()] = "[O]";
+                    dungeon[player1.getxLoc()][player1.getyLoc()] = "[O]";
 
                 }
                 else {
@@ -162,4 +162,23 @@ import java.util.Scanner;
         {
             gameOn = false;
         }
-}
+        public Runner(Room[][] board)
+        {
+            this.board = board;
+        }
+        public Runner(int height, int width)
+        {
+            board = new Room[height][width];
+        }
+        public void printBoard()
+        {
+            for(Room[] i : board)
+            {
+                for(Room j : i)
+                {
+                    System.out.print(j);
+                }
+                System.out.println();
+            }
+        }
+    }
