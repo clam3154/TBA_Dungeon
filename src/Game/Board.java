@@ -4,7 +4,7 @@ import Room.Room;
 
 public class Board
 {
-    private Room[][] board;
+    private static Room[][] board;
 
     public Board(Room[][] board)
     {
@@ -14,7 +14,7 @@ public class Board
     {
         board = new Room[height][width];
     }
-    public void printBoard()
+    public static void printBoard()
     {
         for(Room[] i : board)
         {

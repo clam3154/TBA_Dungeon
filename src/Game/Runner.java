@@ -6,6 +6,7 @@ import Room.Monster;
 import Room.Room;
 import Room.Trap;
 import Room.Wall;
+import Game.Board;
 
 import java.util.Scanner;
 
@@ -17,7 +18,7 @@ import java.util.Scanner;
         public static void main(String[] args)
         {
             Room[][] dungeon = new Room[14][14];
-
+            
             //Fill the dungeon with normal rooms
             for (int x = 0; x<dungeon.length; x++)
             {
@@ -71,21 +72,11 @@ import java.util.Scanner;
             Scanner in = new Scanner(System.in);
             while(gameOn)
             {
-                String row = "";
-                for(int i=0; i<dungeon.length; i++)
-                {
-                    for(int j=0; j<dungeon[i].length; j++)
-                    {
-                        row += dungeon[i][j];
-                    }
-                    row += "\n";
-                }
-                System.out.println(row);
+                Board.printBoard();
                 System.out.println("Where would you like to move? (Choose N, S, E, W)");
                 String move = in.nextLine();
                 if(validMove(move, player1, dungeon))
                 {
-                    dungeon[player1.getxLoc()][player1.getyLoc()] = "[O]";
 
                 }
                 else {
