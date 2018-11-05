@@ -20,6 +20,7 @@ public class Board
         {
             for(Room j : i)
             {
+                board[i][j] = "[]";
                 System.out.print(j);
             }
             System.out.println();

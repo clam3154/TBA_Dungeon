@@ -17,8 +17,10 @@ import java.util.Scanner;
 
         public static void main(String[] args)
         {
-            Room[][] dungeon = new Room[14][14];
-            
+            Room[][] dungeon = new Room[10][10];
+
+            new Board(10,10);
+
             //Fill the dungeon with normal rooms
             for (int x = 0; x<dungeon.length; x++)
             {
@@ -77,6 +79,7 @@ import java.util.Scanner;
                 String move = in.nextLine();
                 if(validMove(move, player1, dungeon))
                 {
+                    System.out.println("Your coordinates: row = " + player1.getxLoc() + " col = " + player1.getyLoc());
 
                 }
                 else {
