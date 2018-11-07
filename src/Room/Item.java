@@ -1,5 +1,4 @@
 package Room;
-import Game.Runner;
 import People.Person;
 
 public class Item extends Room{
@@ -8,15 +7,18 @@ public class Item extends Room{
         super(x, y);
     }
     /**
-     * Triggers the game ending conditions.
+     * Method controls the results when a person enters this room.
      * @param x the Person entering
      */
     @Override
-    public void enterRoom(Person x) {
-        System.out.println(".");
+    public void enterRoom(Person x)
+    {
+        String[] randomitem = {("Health Potion"), ("Leather Armor"), ("Iron Armor"), ("Attack Power Up"), ("Drill")};
+        int i = (int) (Math.random() * randomitem.length);
+        System.out.println("You found a chest.");
+        System.out.println("You got a " + randomitem[i] + ".");
         occupant = x;
         x.setxLoc(this.xLoc);
         x.setyLoc(this.yLoc);
-        Runner.gameOff();
     }
 }

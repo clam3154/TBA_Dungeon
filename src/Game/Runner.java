@@ -6,7 +6,6 @@ import Room.Monster;
 import Room.Room;
 import Room.Trap;
 import Room.Wall;
-import Game.Board;
 
 import java.util.Scanner;
 
@@ -17,9 +16,12 @@ import java.util.Scanner;
 
         public static void main(String[] args)
         {
-            Room[][] dungeon = new Room[10][10];
-
-            new Board(10,10);
+            System.out.println("What level do you want to play on? (1, 2, or 3)");
+            Scanner start = new Scanner(System.in);
+            int level = start.nextInt();
+            int num = (level*6);
+            Room[][] dungeon = new Room[num][num];
+            new Board(num, num);
 
             //Fill the dungeon with normal rooms
             for (int x = 0; x<dungeon.length; x++)
@@ -30,43 +32,43 @@ import java.util.Scanner;
                 }
             }
 
+            //Make all room filled with monsters.
+            for (int x = 0; x<dungeon.length; x++)
+            {
+                for (int y = 0; y < dungeon[x].length; y++)
+                {
+                    dungeon[x][y] = new Monster(x,y);
+                }
+            }
+
+            //Create up to 15 random item rooms.
+            for(int i = 1; i < 16; i ++)
+            {
+                int xi = (int) (Math.random() * dungeon.length);
+                int yi = (int) (Math.random() * dungeon.length);
+                dungeon[xi][yi] = new Item(xi, yi);
+            }
+
+            //Create up to 7 random wall.
+            for(int i = 1; i < 8; i ++)
+            {
+                int xw = (int) (Math.random() * dungeon.length);
+                int yw = (int) (Math.random() * dungeon.length);
+                dungeon[xw][yw] = new Wall(xw, yw);
+            }
+
+            //Create up to 3 random trapped room.
+            for(int i = 1; i < 4; i ++)
+            {
+                int xt = (int) (Math.random() * dungeon.length);
+                int yt = (int) (Math.random() * dungeon.length);
+                dungeon[xt][yt] = new Trap(xt, yt);
+            }
+
             //Create a random boss room.
             int xb = (int)(Math.random()*dungeon.length);
             int yb = (int)(Math.random()*dungeon.length);
             dungeon[xb][yb] = new Boss(xb, yb);
-
-            //Create a random trapped room.
-            int xt = (int)(Math.random()*dungeon.length);
-            int yt = (int)(Math.random()*dungeon.length);
-            if(xb == xt && yb == yt)
-            {
-                while(xb == xt && yb == yt)
-                {
-                    xt = (int)(Math.random()*dungeon.length);
-                    yt = (int)(Math.random()*dungeon.length);
-                }
-            }
-            else
-            {
-                dungeon[xt][yt] = new Trap(xt, yt);
-            }
-
-            //Create up to 7 random wall.
-            for(int i = 1; i < 7; i ++)
-            {
-                int xw = (int) (Math.random() * dungeon.length);
-                int yw = (int) (Math.random() * dungeon.length);
-                if (xb == xw && yb == yw || xt == xw && yt == yw)
-                {
-                    while (xb == xw && yb == yw || xt == xw && yt == yw)
-                    {
-                        xw = (int) (Math.random() * dungeon.length);
-                        yw = (int) (Math.random() * dungeon.length);
-                    }
-                } else {
-                    dungeon[xw][yw] = new Wall(xw, yw);
-                }
-            }
 
             //Setup player 1 and the input scanner
             Person player1 = new Person(0,0);
@@ -80,7 +82,7 @@ import java.util.Scanner;
                 if(validMove(move, player1, dungeon))
                 {
                     System.out.println("Your coordinates: row = " + player1.getxLoc() + " col = " + player1.getyLoc());
-
+                    dungeon[player1.getxLoc()][player1.getyLoc()] = new Room(player1.getxLoc(), player1.getyLoc());
                 }
                 else {
                     System.out.println("Please choose a valid move.");

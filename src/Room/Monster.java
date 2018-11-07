@@ -1,5 +1,4 @@
 package Room;
-import Game.Runner;
 import People.Person;
 
 public class Monster extends Room{
@@ -8,16 +7,16 @@ public class Monster extends Room{
         super(x, y);
     }
     /**
-     * Triggers the game ending conditions.
+     * Method controls the results when a person enters this room.
      * @param x the Person entering
      */
     @Override
     public void enterRoom(Person x) {
-        System.out.println("");
+        String[] randommonster = {("zombie"), ("husk"), ("ghoul")};
+        int i = (int) (Math.random() * randommonster.length);
+        System.out.println("You encountered a " + randommonster[i] + ".");
         occupant = x;
         x.setxLoc(this.xLoc);
         x.setyLoc(this.yLoc);
-
-        Runner.gameOff();
     }
 }

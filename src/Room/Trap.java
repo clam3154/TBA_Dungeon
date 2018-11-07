@@ -1,5 +1,4 @@
 package Room;
-import Game.Runner;
 import People.Person;
 public class Trap extends Room
 {
@@ -7,13 +6,16 @@ public class Trap extends Room
     {
         super(x, y);
     }
+    /**
+     * Method controls the results when a person enters this room.
+     * @param x the Person entering
+     */
     @Override
     public void enterRoom(Person x) {
-
+        System.out.println("The room was trapped. You lost 20 health.");
         occupant = x;
         x.setxLoc(this.xLoc);
         x.setyLoc(this.yLoc);
-        System.out.println("The room was trapped. You died.");
-        Runner.gameOff();
+
     }
 }
