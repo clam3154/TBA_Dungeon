@@ -16,9 +16,18 @@ import java.util.Scanner;
 
         public static void main(String[] args)
         {
+            int level;
             System.out.println("What level do you want to play on? (1, 2, or 3)");
             Scanner start = new Scanner(System.in);
-            int level = start.nextInt();
+            if(start.nextInt() == 1 || start.nextInt() == 2 || start.nextInt() == 3)
+            {
+                level = start.nextInt();
+            }
+            else
+            {
+                System.out.println("Level defaults to 1.");
+                level = 1;
+            }
             int num = (level*6);
             Room[][] dungeon = new Room[num][num];
             new Board(num, num);
