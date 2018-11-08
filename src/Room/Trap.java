@@ -12,7 +12,7 @@ public class Trap extends Room
      */
     @Override
     public void enterRoom(Person x) {
-        System.out.println("The room was trapped. You lost 20 health.");
+        System.out.println("The room was trapped. You lost 4 health.");
         occupant = x;
         x.setxLoc(this.xLoc);
         x.setyLoc(this.yLoc);

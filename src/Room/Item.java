@@ -13,7 +13,7 @@ public class Item extends Room{
     @Override
     public void enterRoom(Person x)
     {
-        String[] randomitem = {("Health Potion"), ("Leather Armor"), ("Iron Armor"), ("Attack Power Up"), ("Drill")};
+        String[] randomitem = {("Health Potion"), (""), ("Piece of Armor"), ("Attack Power Up"), ("Drill")};
         int i = (int) (Math.random() * randomitem.length);
         System.out.println("You found a chest.");
         System.out.println("You got a " + randomitem[i] + ".");

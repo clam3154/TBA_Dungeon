@@ -25,7 +25,7 @@ import java.util.Scanner;
             }
             else
             {
-                System.out.println("Level defaults to 1.");
+                System.out.println("Incorrect input. Level defaults to 1.");
                 level = 1;
             }
             int num = (level*6);
@@ -81,6 +81,7 @@ import java.util.Scanner;
 
             //Setup player 1 and the input scanner
             Person player1 = new Person(0,0);
+            Person player1s = new Person(20, 0, 1);
             dungeon[0][0].enterRoom(player1);
             Scanner in = new Scanner(System.in);
             while(gameOn)
@@ -88,9 +89,18 @@ import java.util.Scanner;
                 Board.printBoard();
                 System.out.println("Where would you like to move? (Choose N, S, E, W)");
                 String move = in.nextLine();
-                if(validMove(move, player1, dungeon))
+                if (move.equalsIgnoreCase("help"))
+                {
+                    System.out.println("Use n,s,e,w to move.");
+                    System.out.println("Reach the boss room and beat the boss.");
+                    System.out.println("Block beats Hit, Hit beats Spell, Spell beats Block.");
+                    System.out.println("If you reach 0 health you lose.");
+                    System.out.println("If your armor is greater than the enemies attack, they deal no damage.");
+                }
+                else if(validMove(move, player1, player1s, dungeon))
                 {
                     System.out.println("Your coordinates: row = " + player1.getxLoc() + " col = " + player1.getyLoc());
+                    System.out.println("Your stats: Health: " + player1s.gethealth() + " Armor: " + player1s.getarmor() + " Attack: " + player1s.getattack());
                     dungeon[player1.getxLoc()][player1.getyLoc()] = new Room(player1.getxLoc(), player1.getyLoc());
                 }
                 else {
@@ -107,7 +117,7 @@ import java.util.Scanner;
          * @param map the 2D array of rooms
          * @return
          */
-        public static boolean validMove(String move, Person p, Room[][] map)
+        public static boolean validMove(String move, Person p, Person ps, Room[][] map)
         {
             move = move.toLowerCase().trim();
             switch (move) {
