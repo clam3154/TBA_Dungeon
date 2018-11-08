@@ -25,6 +25,6 @@ public class Item extends Room{
         if(i == 3)
             x.setattack(x.getattack()+1);
         else
-            x.storeitem(randomitem[i]);
+            x.storeitems(randomitem[i]);
     }
 }
