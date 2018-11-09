@@ -1,4 +1,5 @@
 package Game;
+import Board.Map;
 import People.Person;
 import Room.Boss;
 import Room.Item;
@@ -43,7 +44,7 @@ import java.util.Scanner;
             if(level == 3)
                 num = 10;
             Room[][] dungeon = new Room[num][num];
-            new Board(num, num);
+            new Map(num, num);
 
             //Fill the dungeon with normal rooms
             for (int x = 0; x<dungeon.length; x++)
@@ -93,7 +94,7 @@ import java.util.Scanner;
             Scanner in = new Scanner(System.in);
             while(gameOn)
             {
-                Board.printBoard();
+                Map.printBoard();
                 System.out.println("Where would you like to move? (Choose N, S, E, W)");
                 String move = in.nextLine();
                 if (move.equalsIgnoreCase("help"))
