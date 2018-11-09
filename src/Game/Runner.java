@@ -39,9 +39,9 @@ import java.util.Scanner;
             if(level == 1)
                 num = 6;
             if(level == 2)
-                num = 7;
-            if(level == 3)
                 num = 8;
+            if(level == 3)
+                num = 10;
             Room[][] dungeon = new Room[num][num];
             new Board(num, num);
 
@@ -83,6 +83,9 @@ import java.util.Scanner;
             int xb = (int)(Math.random()*dungeon.length);
             int yb = (int)(Math.random()*dungeon.length);
             dungeon[xb][yb] = new Boss(xb, yb);
+
+            //Make the start room empty.
+            dungeon[0][0] = new Room(0,0);
 
             //Setup player 1 and the input scanner
             Person player1 = new Person(0,0);

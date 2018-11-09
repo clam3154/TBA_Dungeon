@@ -25,4 +25,16 @@ public class Board
             System.out.println();
         }
     }
+    public String toString()
+    {
+        String str = "";
+        for(Room[] i : board)
+        {
+            for(Room j : i)
+            {
+                str += "[" + j + "]";
+            }
+            str += "\n";
+        }
+    }
 }

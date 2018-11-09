@@ -2,10 +2,9 @@ package People;
 /**
  * People represents the player as they move through the game.
  */
-public class Person {
+public class Person implements Stats{
     int xLoc, yLoc;
     int health = 20, armor = 0, attack = 1;
-    String[] items = new String[15];
 
     public int getxLoc() {
         return xLoc;
