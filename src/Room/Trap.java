@@ -16,6 +16,6 @@ public class Trap extends Room
         occupant = x;
         x.setxLoc(this.xLoc);
         x.setyLoc(this.yLoc);
-
+        x.sethealth(x.gethealth()+3);
     }
 }

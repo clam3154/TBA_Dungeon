@@ -25,9 +25,4 @@ public class Board
             System.out.println();
         }
     }
-
-    @Override
-    public String toString() {
-        return super.toString();
-    }
 }

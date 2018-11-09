@@ -4,7 +4,7 @@ package People;
  */
 public class Person {
     int xLoc, yLoc;
-    int health, armor, attack;
+    int health = 20, armor = 0, attack = 1;
     String[] items = new String[15];
 
     public int getxLoc() {
@@ -26,12 +26,6 @@ public class Person {
     public Person(int xLoc, int yLoc) {
         this.xLoc = xLoc;
         this.yLoc = yLoc;
-    }
-
-    public Person(int health, int armor, int attack) {
-        this.health = health;
-        this.armor = armor;
-        this.attack = attack;
     }
 
     public int gethealth() {
@@ -57,28 +51,4 @@ public class Person {
     public void setattack(int attack) {
         this.attack = attack;
     }
-
-    public Person(String[] items)
-    {
-        this.items = items;
-    }
-
-    public String getitems() {
-        String str = "";
-        for(int i=0; i<items.length; i++) {
-            if (items[i] != null) {
-                str += items[i];
-            }
-        }
-        return str;
-    }
-
-    public void storeitems(String item) {
-        for(int i=0; i<items.length; i++) {
-            if (items[i].equals(null)) {
-                items[i] = item;
-            }
-        }
-    }
-
 }

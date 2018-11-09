@@ -5,7 +5,6 @@ import Room.Item;
 import Room.Monster;
 import Room.Room;
 import Room.Trap;
-import Room.Wall;
 
 import java.util.Scanner;
 
@@ -17,7 +16,8 @@ import java.util.Scanner;
         public static void main(String[] args)
         {
             int level;
-            System.out.println("What level do you want to play on? (1, 2, or 3)");
+            int num = 0;
+            System.out.println("What level do you want to play on? Easy(1), Medium(2), Hard(3)");
             Scanner start = new Scanner(System.in);
             if(start.nextInt() == 1 || start.nextInt() == 2 || start.nextInt() == 3)
             {
@@ -28,7 +28,12 @@ import java.util.Scanner;
                 System.out.println("Incorrect input. Level defaults to 1.");
                 level = 1;
             }
-            int num = (level*6);
+            if(level == 1)
+                num = 6;
+            if(level == 2)
+                num = 8;
+            if(level == 3)
+                num = 10;
             Room[][] dungeon = new Room[num][num];
             new Board(num, num);
 
@@ -58,14 +63,6 @@ import java.util.Scanner;
                 dungeon[xi][yi] = new Item(xi, yi);
             }
 
-            //Create up to 7 random wall.
-            for(int i = 1; i < 8; i ++)
-            {
-                int xw = (int) (Math.random() * dungeon.length);
-                int yw = (int) (Math.random() * dungeon.length);
-                dungeon[xw][yw] = new Wall(xw, yw);
-            }
-
             //Create up to 3 random trapped room.
             for(int i = 1; i < 4; i ++)
             {
@@ -81,7 +78,6 @@ import java.util.Scanner;
 
             //Setup player 1 and the input scanner
             Person player1 = new Person(0,0);
-            Person player1s = new Person(20, 0, 1);
             dungeon[0][0].enterRoom(player1);
             Scanner in = new Scanner(System.in);
             while(gameOn)
@@ -97,10 +93,10 @@ import java.util.Scanner;
                     System.out.println("If you reach 0 health you lose.");
                     System.out.println("If your armor is greater than the enemies attack, they deal no damage.");
                 }
-                else if(validMove(move, player1, player1s, dungeon))
+                else if(validMove(move, player1, dungeon))
                 {
                     System.out.println("Your coordinates: row = " + player1.getxLoc() + " col = " + player1.getyLoc());
-                    System.out.println("Your stats: Health: " + player1s.gethealth() + " Armor: " + player1s.getarmor() + " Attack: " + player1s.getattack());
+                    System.out.println("Your stats: Health: " + player1.gethealth() + " Armor: " + player1.getarmor() + " Attack: " + player1.getattack());
                     dungeon[player1.getxLoc()][player1.getyLoc()] = new Room(player1.getxLoc(), player1.getyLoc());
                 }
                 else {
@@ -117,7 +113,7 @@ import java.util.Scanner;
          * @param map the 2D array of rooms
          * @return
          */
-        public static boolean validMove(String move, Person p, Person ps, Room[][] map)
+        public static boolean validMove(String move, Person p, Room[][] map)
         {
             move = move.toLowerCase().trim();
             switch (move) {
@@ -169,7 +165,6 @@ import java.util.Scanner;
                     }
                 default:
                     break;
-
             }
             return true;
         }
