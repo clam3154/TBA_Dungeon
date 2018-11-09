@@ -21,7 +21,7 @@ public class Item extends Room{
         x.setxLoc(this.xLoc);
         x.setyLoc(this.yLoc);
         if(i <= 1)
-            x.sethealth(x.gethealth()+4);
+            x.sethealth(x.gethealth()+6);
         if(i == 2)
             x.setarmor(x.getarmor()+1);
         if(i == 3)

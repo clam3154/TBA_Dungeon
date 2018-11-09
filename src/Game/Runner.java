@@ -16,10 +16,18 @@ import java.util.Scanner;
         public static void main(String[] args)
         {
             int level;
-            int num = 0;
+            int num = 1;
             System.out.println("What level do you want to play on? Easy(1), Medium(2), Hard(3)");
             Scanner start = new Scanner(System.in);
-            if(start.nextInt() == 1 || start.nextInt() == 2 || start.nextInt() == 3)
+            if(start.nextInt() == 1)
+            {
+                level = start.nextInt();
+            }
+            else if (start.nextInt() == 2)
+            {
+                level = start.nextInt();
+            }
+            else if (start.nextInt() == 3)
             {
                 level = start.nextInt();
             }
@@ -31,9 +39,9 @@ import java.util.Scanner;
             if(level == 1)
                 num = 6;
             if(level == 2)
-                num = 8;
+                num = 7;
             if(level == 3)
-                num = 10;
+                num = 8;
             Room[][] dungeon = new Room[num][num];
             new Board(num, num);
 
@@ -89,7 +97,7 @@ import java.util.Scanner;
                 {
                     System.out.println("Use n,s,e,w to move.");
                     System.out.println("Reach the boss room and beat the boss.");
-                    System.out.println("Block beats Hit, Hit beats Spell, Spell beats Block.");
+                    System.out.println("Block beats Hit, Hit beats Magic, Magic beats Block.");
                     System.out.println("If you reach 0 health you lose.");
                     System.out.println("If your armor is greater than the enemies attack, they deal no damage.");
                 }

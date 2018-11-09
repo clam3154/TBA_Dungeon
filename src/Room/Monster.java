@@ -1,4 +1,5 @@
 package Room;
+import Game.Runner;
 import People.Person;
 
 import java.util.Scanner;
@@ -16,7 +17,7 @@ public class Monster extends Room{
     @Override
     public void enterRoom(Person x) {
         String[] randommonster = {("zombie"), ("husk"), ("ghoul")};
-        String[] randommove = {("block"), ("hit"), ("spell")};
+        String[] randommove = {("block"), ("hit"), ("magic")};
         int i = (int) (Math.random() * randommonster.length);
         System.out.println("You encountered a " + randommonster[i] + ".");
         occupant = x;
@@ -37,22 +38,23 @@ public class Monster extends Room{
             mhealth = 5;
             mattack = 3;
         }
-        dmg = x.getarmor()-mattack;
+        dmg = mattack-x.getarmor();
         if(dmg < 0)
             dmg = 0;
-        while(mhealth > 0 || x.gethealth() > 0)
+        while(mhealth > 0 && x.gethealth() > 0)
         {
+            System.out.println("Block, Hit, or Magic");
             int moves = (int) (Math.random() * randommove.length);
             Scanner mov = new Scanner(System.in);
             String attack = mov.nextLine();
             if(attack.equalsIgnoreCase("block")|| attack.equalsIgnoreCase("hit") || attack.equalsIgnoreCase("magic"))
             {
-
             }
             else
             {
                 attack = randommove[(int) (Math.random() * randommove.length)];
             }
+            System.out.println(randommonster[i] + " use " + randommove[moves] + ".");
             if(attack.equalsIgnoreCase(randommove[moves]))
             {
                 System.out.println("Draw, both sides used " + randommove[moves]);
@@ -81,14 +83,17 @@ public class Monster extends Room{
             {
                 x.sethealth(x.gethealth()-dmg);
             }
+            System.out.println(randommonster[i] + " health: " + mhealth + ", " + randommonster[i] + " attack: " + mattack);
+            System.out.println("Your health: " + x.gethealth() + ", Your armor: " + x.getarmor() + ", Your attack: " + x.getattack());
         }
-        if(mhealth > 0)
+        if(mhealth < 0)
         {
             System.out.println("You defeated a " + randommonster[i] + ".");
         }
-        if(x.gethealth() > 0)
+        if(x.gethealth() < 0)
         {
             System.out.println("Game over! You have died.");
+            Runner.gameOff();
         }
     }
 }
