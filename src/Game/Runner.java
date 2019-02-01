@@ -1,12 +1,11 @@
 package Game;
-import Board.Map;
+
 import People.Person;
 import Room.Boss;
 import Room.Item;
 import Room.Monster;
 import Room.Room;
 import Room.Trap;
-
 import java.util.Scanner;
 
     public class Runner {
